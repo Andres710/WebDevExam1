@@ -30,7 +30,34 @@ export default class SaveVis extends Component {
       let time = new Date().getTime();
       console.log(this.state.nameAuthor);
       console.log(this.state.visTitle);
+      console.log(this.props.jsonVega);
+      console.log(this.props.data);
       console.log(time);
+
+      let params = {
+        nameAuthor: this.state.nameAuthor,
+        visTitle: this.state.visTitle,
+        jsonVega: this.props.jsonVega,
+        data: this.props.data,
+        timestamp: time
+      };
+
+      let body = JSON.stringify(params);
+      console.log(body);
+
+      fetch('/visualizations', {
+        method: 'POST',
+        body: body,
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      }).then(response => {
+        console.log(response);
+        response.json().then(json => {
+          console.log(json.message);
+
+        });
+      });
     }
   }
 

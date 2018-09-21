@@ -6,6 +6,19 @@
   margin: auto;
 }
 
+.saveVis {
+  margin: auto;
+  left: 50px;
+}
+
+.visList {
+  margin: auto;
+  left: 50px;
+  text-align: left;
+  vertical-align: top;
+  margin-top: 0%;
+}
+
 .App-logo {
   animation: App-logo-spin infinite 20s linear;
   height: 80px;

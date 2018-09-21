@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import './style/App.css';
 import Visualization from './components/Visualization';
-import SaveVis from './components/NewVis';
+import SaveVis from './components/SaveVis';
+import VisList from './components/VisList';
 
 class App extends Component {
   constructor(props){
@@ -9,7 +10,8 @@ class App extends Component {
 
     this.state = {
       jsonFinal: {},
-      dataArrayActual: []
+      dataArrayActual: [],
+      ultimasVisualizaciones: []
     };
 
     this.getJsonFinal = this.getJsonFinal.bind(this);
@@ -24,6 +26,7 @@ class App extends Component {
     this.setState({dataArrayActual: dataArray});
   }
 
+
   render() {
 
     return (
@@ -32,10 +35,20 @@ class App extends Component {
           <h1>Vega-Lite Editor!</h1>
         </div>
         <div className="container visEdit">
-          <Visualization onJsonChange={this.getJsonFinal} onDataChange={this.getDataArrayActual}/>
+          <Visualization onJsonChange={this.getJsonFinal} onDataChange={this.getDataArrayActual} 
+            jsonActual={this.state.jsonFinal} dataArrayActual={this.state.dataArrayActual}/>
         </div>
-        <div className="container saveVis">
-          <SaveVis/>
+        <div className="row">
+          <div className="col saveVis">
+            <div className="container">
+              <SaveVis jsonVega={this.state.jsonFinal} data={this.state.dataArrayActual}/>
+            </div>
+          </div>
+          <div className="col visList">
+            <div className="container">
+              <VisList onJsonChange={this.getJsonFinal} onDataChange={this.getDataArrayActual}/>
+            </div>
+          </div>
         </div>
       </div>
     );

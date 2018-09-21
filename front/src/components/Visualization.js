@@ -10,9 +10,9 @@ export default class Visualization extends Component {
 
     this.state = {
       jsonMostrado: '',
-      jsonFinal: {},
+      jsonFinal: this.props.jsonActual,
       dataFile: {},
-      dataArray: []
+      dataArray: this.props.dataArrayActual
     };
 
     this.handlePaint = this.handlePaint.bind(this);
@@ -21,8 +21,30 @@ export default class Visualization extends Component {
     this.parseJsonString = this.parseJsonString.bind(this);
     this.drawVisualization = this.drawVisualization.bind(this);
     this.getDataFromCSV = this.getDataFromCSV.bind(this);
+    this.drawVisualizationWithProps = this.drawVisualizationWithProps.bind(this);
     
   }
+
+  componentDidUpdate(prevProps) {
+    if(this.props.jsonActual !== prevProps.jsonActual) {
+      this.setState({
+        jsonFinal: this.props.jsonActual,
+        dataArray: this.props.dataArrayActual
+      });
+
+
+      this.drawVisualizationWithProps();
+      this.hola.value = JSON.stringify(this.props.jsonActual);
+    }
+  }
+
+  // componentDidMount() {
+  //   this.setState({
+  //     jsonFinal: this.props.jsonActual,
+  //     dataArray: this.props.dataArrayActual
+  //   });
+  //   this.drawVisualization();
+  // }
 
   //Para ingreso del JSON
   handleJsonChange(event){
@@ -30,6 +52,7 @@ export default class Visualization extends Component {
     setTimeout(this.parseJsonString, 200);
 
   }
+
 
   handleFileChange(event){
     console.log(event.target.value);
@@ -49,7 +72,7 @@ export default class Visualization extends Component {
       this.drawVisualization();
       this.props.onJsonChange(pruebaParse);
     } catch(error) {
-      //console.log(error);
+      console.log(error);
       console.log('JSON is incomplete or it has a mistake!');
     }
   }
@@ -92,15 +115,54 @@ export default class Visualization extends Component {
           .then((res) =>  {
             const prueba = res.view.insert(dataName, myData).run();
             this.setState({vis: prueba});
-          });
+          }).catch(err => console.log('Please enter a valid specs for Vega-Lite'));
       } catch(error) {
-        console.log('Please enter a valid JSON for Vega-Lite');
+        console.log('Please enter a valid specs for Vega-Lite');
       }
 
     } else {
       try {
         this.getDataFromCSV();
       } catch(error){
+        console.log(error);
+        console.log('Please enter a valid CSV for the given JSON');
+      }
+      
+      
+    }
+  }
+
+  drawVisualizationWithProps() {
+    console.log(this.props.jsonActual);
+
+
+    // var myData = [
+    //   {"a": "A","b": 28}, {"a": "B","b": 55}, {"a": "C","b": 43},
+    //   {"a": "D","b": 91}, {"a": "E","b": 81}, {"a": "F","b": 53},
+    //   {"a": "G","b": 19}, {"a": "H","b": 87}, {"a": "I","b": 52}
+    // ];
+
+    if(this.props.dataArrayActual.length > 0) {
+
+      try {
+        let dataName = this.props.jsonActual.data.name;
+        let myData = this.props.dataArrayActual;
+
+        vegaEmbed(this.div, this.props.jsonActual)
+          .catch(error => console.log(error))
+          .then((res) =>  {
+            const prueba = res.view.insert(dataName, myData).run();
+            this.setState({vis: prueba});
+          }).catch(err => console.log('Please enter a valid specs for Vega-Lite'));
+      } catch(error) {
+        console.log('Please enter a valid specs for Vega-Lite');
+      }
+
+    } else {
+      try {
+        this.getDataFromCSV();
+      } catch(error){
+        console.log(error);
         console.log('Please enter a valid CSV for the given JSON');
       }
       
@@ -144,7 +206,8 @@ export default class Visualization extends Component {
       <div className="container">
 
         <div className="row">
-          <textarea className="textEditor" cols="40" rows="20" onChange={this.handleJsonChange}></textarea>
+          <textarea className="textEditor" cols="40" rows="20" onChange={this.handleJsonChange}
+            ref={(hola) => this.hola=hola}></textarea>
           <div className="grafica" ref={(div) => this.div=div}>Soy un Div</div>
 
         </div>
@@ -159,6 +222,7 @@ export default class Visualization extends Component {
         <br/>
         <br/>
         <br/>
+        
 
       </div>
     );
