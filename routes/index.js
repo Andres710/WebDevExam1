@@ -37,6 +37,8 @@ router.get('/visualizations', (req, res, next) => {
 
 //Post visualization
 router.post('/visualizations', (req, res, next) => {
+  console.log('Pruebaaaa Despliegueeee');
+  console.log('La DB es: ', finalUrl);
   MongoClient.connect(finalUrl, function(error, client) {
     assert.equal(null, error);
     console.log('Connected!');
