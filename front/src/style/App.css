@@ -2,6 +2,10 @@
   text-align: center;
 }
 
+.jumbotron {
+  background-color: #CCE7FC;
+}
+
 .visEdit {
   margin: auto;
 }
@@ -9,6 +13,17 @@
 .saveVis {
   margin: auto;
   left: 50px;
+  border: 2px solid #1FA0FF;
+  border-radius: 5px;
+  padding: 10px;
+}
+
+.searchAuthor {
+  margin: auto;
+  text-align: left;
+  border: 2px solid #1FA0FF;
+  border-radius: 5px;
+  padding: 10px;
 }
 
 .visList {
@@ -17,6 +32,7 @@
   text-align: left;
   vertical-align: top;
   margin-top: 0%;
+  
 }
 
 .App-logo {

@@ -27,14 +27,10 @@ export default class SaveVis extends Component {
     e.preventDefault();
     if(this.state.nameAuthor.length === 0 || this.state.visTitle.length === 0) {
       console.log('Please enter the author and the visualization title to save it');
+      alert('Please enter the author and the visualization title to save it');
     } else{
       let callback = this.props.onNewVis;
       let time = new Date().getTime();
-      console.log(this.state.nameAuthor);
-      console.log(this.state.visTitle);
-      console.log(this.props.jsonVega);
-      console.log(this.props.data);
-      console.log(time);
 
       let params = {
         nameAuthor: this.state.nameAuthor,
@@ -57,6 +53,7 @@ export default class SaveVis extends Component {
         console.log(response);
         response.json().then(json => {
           console.log(json.message);
+          alert(json.message);
           callback();
         });
       }).catch(error => console.log(error));

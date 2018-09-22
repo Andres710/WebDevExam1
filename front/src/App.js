@@ -4,6 +4,7 @@ import Visualization from './components/Visualization';
 import SaveVis from './components/SaveVis';
 import VisList from './components/VisList';
 import RateVis from './components/RateVis';
+import SearchAuthor from './components/SearchAuthor';
 
 class App extends Component {
   constructor(props){
@@ -85,6 +86,7 @@ class App extends Component {
 
   handleClickCreate() {
     this.setState({selected: false});
+    this.setState({dataArrayActual: []});
   }
 
   componentDidMount() {
@@ -138,7 +140,11 @@ class App extends Component {
             </div>
           </div>
         </div>
-        <div className="row">
+        <br/>
+        <br/>
+        <br/>
+        <div className="container searchAuthor">
+          <SearchAuthor/>
         </div>
       </div>
     );

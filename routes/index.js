@@ -9,18 +9,18 @@ const url = 'mongodb://localhost:27017';
 //Database Name
 const dbName = 'parcial1';
 
-
+const finalUrl = process.env.DATABASE_URL || url;
 
 //Get visualizations
 router.get('/visualizations', (req, res, next) => {
-  MongoClient.connect(url, function(error, client) {
+  MongoClient.connect(finalUrl, function(error, client) {
     assert.equal(null, error);
     console.log('Connected!');
 
     const db = client.db(dbName);
     let collection = db.collection('visualizations');
 
-    collection.find().limit(20).toArray((err, result) => {
+    collection.find().sort({$natural:-1}).limit(20).toArray((err, result) => {
       assert.equal(null, err);
       console.log(result);
       res.status(200).send(result);
@@ -32,7 +32,7 @@ router.get('/visualizations', (req, res, next) => {
 
 //Post visualization
 router.post('/visualizations', (req, res, next) => {
-  MongoClient.connect(url, function(error, client) {
+  MongoClient.connect(finalUrl, function(error, client) {
     assert.equal(null, error);
     console.log('Connected!');
 
@@ -65,7 +65,7 @@ router.post('/visualizations', (req, res, next) => {
 
 //Post rating
 router.post('/ratings', (req, res, next) => {
-  MongoClient.connect(url, function(error, client) {
+  MongoClient.connect(finalUrl, function(error, client) {
     assert.equal(null, error);
     console.log('Connected!');
 
@@ -94,16 +94,13 @@ router.post('/ratings', (req, res, next) => {
 
 //Rating in Visualization
 router.put('/visualizations', (req, res, next) => {
-  MongoClient.connect(url, function(error, client) {
+  MongoClient.connect(finalUrl, function(error, client) {
     assert.equal(null, error);
     console.log('Connected!');
 
     const db = client.db(dbName);
     let collection = db.collection('visualizations');
-
-    console.log('El titulooooooooooo  ', req.body.visTitle);  
-    console.log('Num Ratiiiiiiiings ', req.body.numRatings);
-    console.log('Avg Ratiiiiiiiiiiing', req.body.avgRating);      
+    
 
     collection.findOneAndUpdate({visTitle:req.body.visTitle},{$set: {numRatings: req.body.numRatings, avgRating: req.body.avgRating}},
       function(err, r) {
@@ -119,6 +116,26 @@ router.put('/visualizations', (req, res, next) => {
 
   });
 });
+
+//Get visualizations by author
+router.get('/visualizations/:authorName', (req, res, next) => {
+  MongoClient.connect(finalUrl, function(error, client) {
+    assert.equal(null, error);
+    console.log('Connected!');
+
+    const db = client.db(dbName);
+    let collection = db.collection('visualizations');
+
+    let author = req.params.authorName;
+    collection.find({nameAuthor: author}).toArray((err, result) => {
+      assert.equal(null, err);
+      console.log(result);
+      res.status(200).send(result);
+      client.close();
+    });
+  }); 
+});
+
 
 
 

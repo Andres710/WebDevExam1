@@ -9,25 +9,9 @@ export default class VisList extends Component {
 
   }
 
-  // componentDidMount() {
-  //   fetch('/visualizations', {
-  //     method: 'GET'
-  //   }).then((response) => {
-  //     return response.json();
-  //   })
-  //     .then((json) => {
-  //       console.log(json);
-  //       this.setState({ultimasVisualizaciones: json});
-  //     })
-  //     .catch(error => console.log(error));
-  // }
-
-
 
   handleClick(nameAuthor, visTitle) {
 
-    console.log(nameAuthor);
-    console.log(visTitle);
     //let visArray = this.state.ultimasVisualizaciones;
     let visArray = this.props.ultimasVisualizaciones;
 

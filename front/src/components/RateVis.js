@@ -28,19 +28,17 @@ export default class RateVis extends Component {
   handleSubmit(e){
     e.preventDefault();
 
-    console.log('Holaaaaaaaa', this.state.rating);
-    console.log('Chaooooooooo', this.props.avgRating);
     if(this.state.name.length === 0) {
       console.log('Please enter your name to leave a rating');
     } else{
 
       let callback = this.props.onRate;
       let nuevoNumRating = this.props.numRatings + 1;
-      console.log('nuevo Num Rating  ', nuevoNumRating);
+
       let x = this.props.avgRating * this.props.numRatings;
-      console.log('xxxxxxxxxxxxx   ', x);
+
       let nuevoAvgRating = (x + this.state.rating)/nuevoNumRating;
-      console.log('nuevo Avg Rating   ', nuevoAvgRating);
+
 
       let params = {
         visTitle: this.props.visTitle,

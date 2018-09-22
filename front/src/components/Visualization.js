@@ -118,15 +118,19 @@ export default class Visualization extends Component {
           .then((res) =>  {
             const prueba = res.view.insert(dataName, myData).run();
             this.setState({vis: prueba});
+            this.setState({errorMessage: ''});
+            this.div.hidden = false;
           }).catch(err => {
             console.log('Please enter a valid specs for Vega-Lite');
             this.div.value = 'Please enter a valid specs for Vega-Lite';
             this.setState({errorMessage: 'Please enter a valid specs for Vega-Lite'});
+            this.div.hidden = true;
           });
       } catch(error) {
         console.log('Please enter a valid specs for Vega-Lite');
         this.div.value = 'Please enter a valid specs for Vega-Lite';
         this.setState({errorMessage: 'Please enter a valid specs for Vega-Lite'});
+        this.div.hidden = true;
       }
 
     } else {
@@ -137,6 +141,7 @@ export default class Visualization extends Component {
         console.log('Please enter a valid CSV for the given JSON');
         this.div.value = 'Please enter a valid specs for Vega-Lite';
         this.setState({errorMessage: 'Please enter a valid specs for Vega-Lite'});
+        this.div.hidden = true;
       }
       
       
@@ -165,15 +170,18 @@ export default class Visualization extends Component {
             const prueba = res.view.insert(dataName, myData).run();
             this.setState({vis: prueba});
             this.setState({errorMessage: ''});
+            this.div.hidden = false;
           }).catch(err => {
             console.log('Please enter a valid specs for Vega-Lite');
             this.div.value = 'Please enter a valid specs for Vega-Lite';
+            this.div.hidden = true;
             this.setState({errorMessage: 'Please enter a valid specs for Vega-Lite'});
           });
       } catch(error) {
         console.log('Please enter a valid specs for Vega-Lite');
         this.div.value = 'Please enter a valid specs for Vega-Lite';
         this.setState({errorMessage: 'Please enter a valid specs for Vega-Lite'});
+        this.div.hidden = true;
       }
 
     } else {
@@ -184,6 +192,7 @@ export default class Visualization extends Component {
         console.log('Please enter a valid CSV for the given JSON');
         this.div.value = 'Please enter a valid CSV for the given JSON';
         this.setState({errorMessage: 'Please enter a valid CSV for the given JSON'});
+        this.div.hidden = true;
       }
       
       
