@@ -9,7 +9,12 @@ const url = 'mongodb://localhost:27017';
 //Database Name
 const dbName = 'parcial1';
 
+//Credenciales
+//mongodb://usuario1:editor123@ds211083.mlab.com:11083
+
 const finalUrl = process.env.DATABASE_URL || url;
+
+console.log('La DB es: ', finalUrl);
 
 //Get visualizations
 router.get('/visualizations', (req, res, next) => {
