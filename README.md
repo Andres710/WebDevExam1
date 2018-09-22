@@ -1,6 +1,15 @@
-# WebDevExam1
+# WebDevExam1 - Vega Lite Editor!
 
-The objective...
+The objective of this project is to create a minimalistic Vega-Lite editor in which a user can create his own
+visualizations by writing their json specs in the editor and uploading data with a .csv file. Aditionally, the
+users can store their visualizations and leave ratings to other visualizations they like.
+
+### Creative Component
+As an addition to the exam, my creative component is that I added a search bar where the users can search authors of visualizations. The users can type the name of an author and they will get the list of their visualizations that are stored in the database and some statistics regarding the ratings of their visualizations.
+
+### Specs and Data Examples
+Inside the folder /data of this project, you can find some examples of correct json specs for the Vega-Lite editor and some .csv files that you can try.
+
 
 ### Getting started
 

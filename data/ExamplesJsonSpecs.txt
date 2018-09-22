@@ -1,0 +1,50 @@
+Examples Json Specs
+
+//Line
+{ "$schema":"https://vega.github.io/schema/vega-lite/v2.json",
+  "description":"A simple dot chart with embedded data.",
+  "data":{"name":"myData"},
+  "mark":"line",
+  "encoding":{
+    "y":{"field":"a","type":"ordinal"},
+    "x":{"field":"b","type":"quantitative"}
+    }
+}
+
+//Bar
+{ "$schema":"https://vega.github.io/schema/vega-lite/v2.json",
+  "description":"A simple dot chart with embedded data.",
+  "data":{"name":"myData"},
+  "mark":"bar",
+  "encoding":{
+    "y":{"field":"a","type":"ordinal"},
+    "x":{"field":"b","type":"quantitative"}
+    }
+}
+
+//Point
+{ "$schema":"https://vega.github.io/schema/vega-lite/v2.json",
+  "description":"A simple dot chart with embedded data.",
+  "data":{"name":"myData"},
+  "mark":"point",
+  "encoding":{
+    "y":{"field":"a","type":"ordinal"},
+    "x":{"field":"b","type":"quantitative"}
+    }
+}
+
+//Circle
+{ "$schema":"https://vega.github.io/schema/vega-lite/v2.json",
+  "description":"A simple dot chart with embedded data.",
+  "data":{"name":"myData"},
+  "mark":"circle",
+  "encoding":{
+    "y":{"field":"a","type":"ordinal"},
+    "x":{"field":"b","type":"quantitative"}
+    }
+}
+
+
+
+
+
