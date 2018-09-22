@@ -9,8 +9,6 @@ const url = 'mongodb://localhost:27017';
 //Database Name
 const dbName = 'parcial1';
 
-
-//const finalUrl = 'mongodb://usuario1:editor123@ds211083.mlab.com:11083';
 const prueba = 'mongodb://prueba:prueba1@ds211083.mlab.com:11083/parcial1';
 const finalUrl = prueba;
 
