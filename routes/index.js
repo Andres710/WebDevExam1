@@ -17,11 +17,11 @@ const finalUrl = prueba;
 
 //Get visualizations
 router.get('/visualizations', (req, res, next) => {
-  MongoClient.connect(finalUrl, function(error, db) {
+  MongoClient.connect(finalUrl, function(error, client) {
     assert.equal(null, error);
     console.log('Connected!');
 
-    //const db = client.db(dbName);
+    const db = client.db(dbName);
     let collection = db.collection('visualizations');
 
     collection.find().sort({$natural:-1}).limit(20).toArray((err, result) => {
