@@ -28,7 +28,7 @@ router.get('/visualizations', (req, res, next) => {
       assert.equal(null, err);
       console.log(result);
       res.status(200).send(result);
-      client.close();
+      db.close();
     });
   }); 
 });
