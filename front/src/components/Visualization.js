@@ -152,12 +152,6 @@ export default class Visualization extends Component {
     console.log(this.props.jsonActual);
 
 
-    // var myData = [
-    //   {"a": "A","b": 28}, {"a": "B","b": 55}, {"a": "C","b": 43},
-    //   {"a": "D","b": 91}, {"a": "E","b": 81}, {"a": "F","b": 53},
-    //   {"a": "G","b": 19}, {"a": "H","b": 87}, {"a": "I","b": 52}
-    // ];
-
     if(this.props.dataArrayActual.length > 0) {
 
       try {
@@ -199,7 +193,7 @@ export default class Visualization extends Component {
     }
   }
   
-  //Para pintar la visualización
+  //Para pintar la visualización (Ejemplo)
   handlePaint() {
 
     var spec = {

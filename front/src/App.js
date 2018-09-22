@@ -69,8 +69,6 @@ class App extends Component {
         this.setState({ultimasVisualizaciones: json});
         let arreglo = this.state.ultimasVisualizaciones;
         for(let i = 0; i < arreglo.length; i++) {
-          console.log('Reina del flow ', visTitle);
-          console.log('Charly flow ', arreglo[i].visTitle);
           if(arreglo[i].visTitle === visTitle) {
             // console.log(arreglo[i].numRatings);
             // console.log(arreglo[i].avgRating);

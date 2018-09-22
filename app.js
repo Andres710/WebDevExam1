@@ -7,15 +7,10 @@ const bodyParser = require('body-parser');
 
 const indexRouter = require('./routes/index');
 
-//Revisar si se usa users
-//const usersRouter = require('./routes/users');
 
 //App
 const app = express();
 
-// view engine setup
-//app.set('views', path.join(__dirname, 'views'));
-//app.set('view engine', 'jade');
 
 app.use(logger('dev'));
 app.use(bodyParser.urlencoded({ extended: false }));
