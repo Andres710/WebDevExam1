@@ -11,7 +11,8 @@ const dbName = 'parcial1';
 
 
 //const finalUrl = 'mongodb://usuario1:editor123@ds211083.mlab.com:11083';
-const finalUrl = url;
+const prueba = 'mongodb://prueba:prueba1@ds211083.mlab.com:11083';
+const finalUrl = prueba;
 
 
 //Get visualizations
