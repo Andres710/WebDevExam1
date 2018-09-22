@@ -12,7 +12,8 @@ export default class Visualization extends Component {
       jsonMostrado: '',
       jsonFinal: this.props.jsonActual,
       dataFile: {},
-      dataArray: this.props.dataArrayActual
+      dataArray: this.props.dataArrayActual,
+      errorMessage: ''
     };
 
     this.handlePaint = this.handlePaint.bind(this);
@@ -74,6 +75,8 @@ export default class Visualization extends Component {
     } catch(error) {
       console.log(error);
       console.log('JSON is incomplete or it has a mistake!');
+      this.div.value = 'JSON is incomplete or it has a mistake!';
+      this.setState({errorMessage: 'JSON is incomplete or it has a mistake!'});
     }
   }
 
@@ -115,9 +118,15 @@ export default class Visualization extends Component {
           .then((res) =>  {
             const prueba = res.view.insert(dataName, myData).run();
             this.setState({vis: prueba});
-          }).catch(err => console.log('Please enter a valid specs for Vega-Lite'));
+          }).catch(err => {
+            console.log('Please enter a valid specs for Vega-Lite');
+            this.div.value = 'Please enter a valid specs for Vega-Lite';
+            this.setState({errorMessage: 'Please enter a valid specs for Vega-Lite'});
+          });
       } catch(error) {
         console.log('Please enter a valid specs for Vega-Lite');
+        this.div.value = 'Please enter a valid specs for Vega-Lite';
+        this.setState({errorMessage: 'Please enter a valid specs for Vega-Lite'});
       }
 
     } else {
@@ -126,6 +135,8 @@ export default class Visualization extends Component {
       } catch(error){
         console.log(error);
         console.log('Please enter a valid CSV for the given JSON');
+        this.div.value = 'Please enter a valid specs for Vega-Lite';
+        this.setState({errorMessage: 'Please enter a valid specs for Vega-Lite'});
       }
       
       
@@ -153,9 +164,16 @@ export default class Visualization extends Component {
           .then((res) =>  {
             const prueba = res.view.insert(dataName, myData).run();
             this.setState({vis: prueba});
-          }).catch(err => console.log('Please enter a valid specs for Vega-Lite'));
+            this.setState({errorMessage: ''});
+          }).catch(err => {
+            console.log('Please enter a valid specs for Vega-Lite');
+            this.div.value = 'Please enter a valid specs for Vega-Lite';
+            this.setState({errorMessage: 'Please enter a valid specs for Vega-Lite'});
+          });
       } catch(error) {
         console.log('Please enter a valid specs for Vega-Lite');
+        this.div.value = 'Please enter a valid specs for Vega-Lite';
+        this.setState({errorMessage: 'Please enter a valid specs for Vega-Lite'});
       }
 
     } else {
@@ -164,6 +182,8 @@ export default class Visualization extends Component {
       } catch(error){
         console.log(error);
         console.log('Please enter a valid CSV for the given JSON');
+        this.div.value = 'Please enter a valid CSV for the given JSON';
+        this.setState({errorMessage: 'Please enter a valid CSV for the given JSON'});
       }
       
       
@@ -202,14 +222,15 @@ export default class Visualization extends Component {
   }
 
   render() {
+    //let errorMessage = <h4></h4>;
     return(
       <div className="container">
 
         <div className="row">
           <textarea className="textEditor" cols="40" rows="20" onChange={this.handleJsonChange}
             ref={(hola) => this.hola=hola}></textarea>
-          <div className="grafica" ref={(div) => this.div=div}>Soy un Div</div>
-
+          <div className="grafica" ref={(div) => this.div=div}>Your visualization will appear here</div>
+          <h4 className="errorMessage">{this.state.errorMessage}</h4>
         </div>
 
         <div className="row">
@@ -218,8 +239,6 @@ export default class Visualization extends Component {
         <div className="row">
           <input type="file" name="Data" onChange={this.handleFileChange}/>
         </div>
-        <br/>
-        <br/>
         <br/>
         <br/>
         

@@ -29,6 +29,7 @@ router.get('/visualizations', (req, res, next) => {
   }); 
 });
 
+
 //Post visualization
 router.post('/visualizations', (req, res, next) => {
   MongoClient.connect(url, function(error, client) {
@@ -44,7 +45,9 @@ router.post('/visualizations', (req, res, next) => {
       visTitle: req.body.visTitle,
       jsonVega: jsonVegaString,
       data: req.body.data,
-      timestamp: req.body.timestamp
+      timestamp: req.body.timestamp,
+      numRatings: 0,
+      avgRating: 0
     }, 
     (err, result) => {
       assert.equal(null, err);
@@ -58,6 +61,63 @@ router.post('/visualizations', (req, res, next) => {
 
   });
 
+});
+
+//Post rating
+router.post('/ratings', (req, res, next) => {
+  MongoClient.connect(url, function(error, client) {
+    assert.equal(null, error);
+    console.log('Connected!');
+
+    const db = client.db(dbName);
+    let collection = db.collection('ratings');
+
+    collection.insertOne({
+      visTitle: req.body.visTitle,
+      name: req.body.name,
+      rating: req.body.rating
+
+    }, 
+    (err, result) => {
+      assert.equal(null, err);
+      res.status(201).json({
+        message: 'Rating saved succesfully'
+      });
+
+      client.close();
+    });
+
+
+  });
+
+});
+
+//Rating in Visualization
+router.put('/visualizations', (req, res, next) => {
+  MongoClient.connect(url, function(error, client) {
+    assert.equal(null, error);
+    console.log('Connected!');
+
+    const db = client.db(dbName);
+    let collection = db.collection('visualizations');
+
+    console.log('El titulooooooooooo  ', req.body.visTitle);  
+    console.log('Num Ratiiiiiiiings ', req.body.numRatings);
+    console.log('Avg Ratiiiiiiiiiiing', req.body.avgRating);      
+
+    collection.findOneAndUpdate({visTitle:req.body.visTitle},{$set: {numRatings: req.body.numRatings, avgRating: req.body.avgRating}},
+      function(err, r) {
+        assert.equal(null, err);
+        res.status(200).json({
+          message: 'Rating saved succesfully'
+        });
+
+        client.close();
+      });
+
+
+
+  });
 });
 
 

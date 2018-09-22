@@ -1,3 +1,8 @@
 .grafica {
   margin: auto
 }
+
+.errorMessage {
+  color: red;
+  margin-left: 200px;
+}

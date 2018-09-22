@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import '../style/SaveVis.css';
 
 export default class SaveVis extends Component {
   constructor(props) {
@@ -27,6 +28,7 @@ export default class SaveVis extends Component {
     if(this.state.nameAuthor.length === 0 || this.state.visTitle.length === 0) {
       console.log('Please enter the author and the visualization title to save it');
     } else{
+      let callback = this.props.onNewVis;
       let time = new Date().getTime();
       console.log(this.state.nameAuthor);
       console.log(this.state.visTitle);
@@ -39,7 +41,7 @@ export default class SaveVis extends Component {
         visTitle: this.state.visTitle,
         jsonVega: this.props.jsonVega,
         data: this.props.data,
-        timestamp: time
+        timestamp: time,
       };
 
       let body = JSON.stringify(params);
@@ -55,9 +57,9 @@ export default class SaveVis extends Component {
         console.log(response);
         response.json().then(json => {
           console.log(json.message);
-
+          callback();
         });
-      });
+      }).catch(error => console.log(error));
     }
   }
 
